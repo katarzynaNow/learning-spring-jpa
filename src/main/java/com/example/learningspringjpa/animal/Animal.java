@@ -1,12 +1,20 @@
 package com.example.learningspringjpa.animal;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Animal {
+
+    enum Gender {
+        FEMALE,
+        MALE,
+        OTHER
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +22,13 @@ public class Animal {
     private String name;
     private Integer age;
     private String species;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    private Boolean albino;
+    @CreationTimestamp
+    private LocalDateTime created;
+    @UpdateTimestamp
+    private LocalDateTime updated;
 
     public Integer getId() {return id;}
 
@@ -30,5 +45,41 @@ public class Animal {
     public String getSpecies() {return species;}
 
     public void setSpecies(String species) {
-        this.species = species;}}
+        this.species = species;}
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Boolean getAlbino() {
+        return albino;
+    }
+
+    public void setAlbino(Boolean albino) {
+        this.albino = albino;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+}
+
+
+
 
