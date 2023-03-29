@@ -12,12 +12,19 @@ public class AnimalController {
     @Autowired
     private AnimalRepository repository;
 
-    @GetMapping
+   /* @GetMapping
     public List<Animal> list(@RequestParam(required = false) String species){
         if (species == null) {
             return repository.findAll();
         }
-        return repository.findAllBySpecies(species);}
+        return repository.findAllBySpecies(species);}*/
+
+    @GetMapping
+    public List<Animal> list(@RequestParam(required = false) String species,@RequestParam(required = false) String name){
+        return repository.findAll(
+                AnimalSpecifications.findBySpeciesAndName(species, name)
+        );
+    }
 
     @GetMapping("/{id}")
     public Animal get(@PathVariable Integer id){
