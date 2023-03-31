@@ -1,4 +1,4 @@
-package com.example.learningspringjpa.toDo;
+package com.example.learningspringjpa.toDo.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

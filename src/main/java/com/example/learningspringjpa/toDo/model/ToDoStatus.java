@@ -1,4 +1,4 @@
-package com.example.learningspringjpa.toDo;
+package com.example.learningspringjpa.toDo.model;
 
 public enum ToDoStatus {
   NEW,

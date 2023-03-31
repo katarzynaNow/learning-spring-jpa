@@ -1,4 +1,4 @@
-package com.example.learningspringjpa.toDo;
+package com.example.learningspringjpa.toDo.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -9,6 +9,6 @@ public class Config implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new StingToInstantConverter());
+        registry.addConverter(new StringToInstantConverter());
     }
 }

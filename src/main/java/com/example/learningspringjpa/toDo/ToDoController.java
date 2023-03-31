@@ -1,5 +1,7 @@
 package com.example.learningspringjpa.toDo;
 
+import com.example.learningspringjpa.toDo.model.ToDo;
+import com.example.learningspringjpa.toDo.model.ToDoStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
