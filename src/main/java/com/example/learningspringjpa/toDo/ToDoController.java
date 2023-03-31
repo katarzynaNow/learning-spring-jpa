@@ -23,6 +23,11 @@ public class ToDoController {
         model.addAttribute("todos", toDoList);
         model.addAttribute("newToDo", newToDo);
         model.addAttribute("statuses", statuses);
+        model.addAttribute("editedId", editedId);
+
+        if(editedId != null) {
+            model.addAttribute("editToDo", toDoRepository.findById(editedId).get());
+        }
 
         return "list-todo";
     }
@@ -41,5 +46,14 @@ public class ToDoController {
         return "redirect:/todos";
     }
 
+    @PostMapping("/edit/{id}")
+    public String edit(ToDo toDo, @PathVariable Integer id) {
+        ToDo existing = toDoRepository.findById(id).get();
+        existing.setStatus(toDo.getStatus());
+        existing.setDeadline(toDo.getDeadline());
+        existing.setTask(toDo.getTask());
+        toDoRepository.save(existing);
 
+        return "redirect:/todos";
+    }
 }

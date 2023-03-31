@@ -30,13 +30,29 @@
             </form>
         </tr>
         <tr th:each="t : ${todos}">
-            <td th:text="${t.getId()}"></td>
-            <td th:text="${t.getTask()}"></td>
-            <td th:text="${#temporals.format(t.getDeadline(), 'dd-MM-yyyy')}"></td>
-            <td th:text="${t.getStatus()}"></td>
-            <td class="row">
-                <a class="btn btn-danger" th:href="@{/todos/delete/{id}(id=${t.getId()})}">Delete</a>
-            </td>
+            <div th:if="${t.getId() != editedId}">
+                <td th:text="${t.getId()}"></td>
+                <td th:text="${t.getTask()}"></td>
+                <td th:text="${#temporals.format(t.getDeadline(), 'dd-MM-yyyy')}"></td>
+                <td th:text="${t.getStatus()}"></td>
+                <td class="row">
+                    <a class="btn btn-danger col" th:href="@{/todos/delete/{id}(id=${t.getId()})}">Delete</a>
+                    <a class="btn btn-warning col" th:href="@{/todos(editedId=${t.getId()})}">Edit</a>
+                </td>
+            </div>
+            <div th:unless="${t.getId() != editedId}">
+                <form method="post" th:action="@{/todos/edit/{id}(id=${editToDo.getId()})}" th:object="${editToDo}">
+                    <td><input class="form-control" type="number" th:field="*{id}" disabled> </td>
+                    <td><input class="form-control" type="text" th:field="*{task}"></td>
+                    <td><input class="form-control" type="date" th:field="*{deadline}"></td>
+                    <td>
+                        <select class="form-control" th:field="*{status}">
+                            <option th:each="s: ${statuses}" th:value="${s}" th:text="${s}"></option>
+                        </select>
+                    </td>
+                    <td><input class="form-control btn btn-primary" type="submit"></td>
+                </form>
+            </div>
 
         </tr>
         </tbody>
