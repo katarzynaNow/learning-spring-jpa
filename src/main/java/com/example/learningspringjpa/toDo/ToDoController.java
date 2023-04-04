@@ -30,7 +30,6 @@ public class ToDoController {
         if(editedId != null) {
             model.addAttribute("editToDo", toDoRepository.findById(editedId).get());
         }
-
         return "list-todo";
     }
 

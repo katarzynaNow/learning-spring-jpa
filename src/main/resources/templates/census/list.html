@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Census</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birth Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="p : ${people}">
+                <div th:if="${p.getId() != editedId}">
+                <td th:text="${p.getId()}"></td>
+                <td th:text="${p.getFirstName()}"></td>
+                <td th:text="${p.getLastName()}"></td>
+                <td th:text="${p.getBirthDate()}"></td>
+                <td class="row col-6">
+                    <a class="btn btn-danger col" th:href="@{/census/delete/{id}(id=${p.getId()})}">Delete</a>
+                    <a class="btn btn-warning col" th:href="@{/census(editedId=${p.getId()})}">Edit</a>
+                </td>
+                </div>
+                <div th:unless="${p.getId() != editedId}">
+                    <form method="post" th:action="@{/census/edit/{id}(id=${editPerson.getId()})}" th:object="${editPerson}">
+                        <td><input class="form-control" type="number" th:field="*{id}" disabled> </td>
+                        <td><input class="form-control" type="text" th:field="*{firstName}"></td>
+                        <td><input class="form-control" type="text" th:field="*{lastName}"></td>
+                        <td><input class="form-control" type="date" th:field="*{birthDate}"></td>
+                        <td><input class="form-control btn btn-primary" type="submit" value="Submit"></td>
+                    </form>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div class="row col-3">
+        <a class="btn btn-primary" th:href="@{/census/create}">Create new entry</a>
+    </div>
+
+</div>
+</body>
+</html>
