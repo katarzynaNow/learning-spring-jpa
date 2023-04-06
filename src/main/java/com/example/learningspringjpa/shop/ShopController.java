@@ -46,9 +46,8 @@ public class ShopController {
     }
 
     @GetMapping("/product/image/{id}")
-    public void showProductImage(@PathVariable Integer id,
-                               HttpServletResponse response) throws IOException {
-        response.setContentType("image/jpeg"); // Or whatever format you wanna use
+    public void showProductImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+        response.setContentType("image/jpeg");
 
         Product product = repository.findById(id).get();
 

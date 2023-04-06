@@ -8,25 +8,16 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+
 <div class="container">
-
-    <a class="btn btn-primary" th:href="@{/shop/create}">Create</a>
-
-<!--    <div class="row">-->
-<!--        <div class="col-3 text-center" th:each="p : ${products}">-->
-<!--            <img class="img-thumbnail rounded" th:src="'/shop/' + ${p.name}" style="max-height: 200px">-->
-<!--            <p th:text="${p.name}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-
+    <a class="btn btn-primary" th:href="@{/shop/create}">Add new product</a>
+    <br><br>
     <div class="row">
-        <div class="col-sm-3 my-2 d-flex align-content-stretch flex-wrap" th:each="product : ${products}">
-            <div class="card">
-                <img class="card-img-top" th:src="@{'shop/product/image/' + ${product.id}}">
+        <div class="col-3 text-center" th:each="product : ${products}">
+                <img class="img-thumbnail rounded" th:src="@{'shop/product/image/' + ${product.id}}" style="max-height: 200px">
                 <p th:text="${product.name}"></p>
-            </div>
         </div>
-
     </div>
+</div>
 </body>
 </html>
