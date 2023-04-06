@@ -11,19 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 @Controller
 @RequestMapping("/shop")
 public class ShopController {
 
     @Autowired
-    private ShopRepository repository;
+    private ProductRepository repository;
 
     @GetMapping
-    public String list(Model model){
-        List<Product> products = repository.findAll();
-        model.addAttribute("products", products);
+    public String list(Model model, @RequestParam(required = false) Category category){
+
+        if(category == null){
+            model.addAttribute("products", repository.findAll());
+        } else {
+            model.addAttribute("products", repository.findAllByCategory(category));
+        }
         return "shop/list";
     }
 

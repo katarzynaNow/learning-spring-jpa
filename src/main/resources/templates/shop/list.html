@@ -13,6 +13,15 @@
     <a class="btn btn-primary" th:href="@{/shop/create}">Add new product</a>
     <br><br>
     <div class="row">
+        <div class="col text-center" th:each="c : ${@productRepository.categories()}">
+            <a class="btn btn-secondary btn-sm" th:href="@{/shop(category=${c})}" th:text="${c}"></a>
+        </div>
+        <div class="col text-center">
+        <a class="btn btn-secondary btn-sm" th:href="@{/shop}">All products</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
         <div class="col-3 text-center" th:each="product : ${products}">
                 <img class="img-thumbnail rounded" th:src="@{'shop/product/image/' + ${product.id}}" style="max-height: 200px">
                 <p th:text="${product.name}"></p>
