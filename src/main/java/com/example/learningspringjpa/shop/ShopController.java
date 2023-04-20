@@ -2,6 +2,9 @@ package com.example.learningspringjpa.shop;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +47,7 @@ public class ShopController {
     public String createAction(Product newProduct, @RequestParam("file")MultipartFile file) throws IOException {
         newProduct.setId(null);
         newProduct.setPicture(file.getBytes());
+        newProduct.setMimeType(file.getContentType());
         repository.save(newProduct);
         return "redirect:/shop";
     }
@@ -57,5 +61,15 @@ public class ShopController {
         InputStream is = new ByteArrayInputStream(product.getPicture());
         IOUtils.copy(is, response.getOutputStream());
     }
+
+ /*   @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<byte[]> content (@PathVariable Integer id){
+        Product product = repository.findById(id).get();
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.parseMediaType(product.getMimeType()))
+                .body(product.getPicture());
+    }*/
 
 }

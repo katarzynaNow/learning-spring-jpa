@@ -12,6 +12,7 @@ public class Product {
     private Category category;
     @Lob
     private byte[] picture;
+    private String mimeType;
 
     public Integer getId() {
         return id;
@@ -43,5 +44,13 @@ public class Product {
 
     public void setPicture(byte[] picture) {
         this.picture = picture;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 }
