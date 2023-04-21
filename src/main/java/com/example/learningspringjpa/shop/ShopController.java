@@ -1,5 +1,6 @@
 package com.example.learningspringjpa.shop;
 
+import jdk.jfr.ContentType;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,16 @@ public class ShopController {
     }
 
     @GetMapping("/product/image/{id}")
+    @ResponseBody
+    public ResponseEntity<byte[]> content (@PathVariable Integer id){
+        Product product = repository.findById(id).get();
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(product.getMimeType() == null ? MediaType.IMAGE_JPEG : MediaType.parseMediaType(product.getMimeType()))
+                .body(product.getPicture());
+    }
+
+    /*    @GetMapping("/product/image/{id}")
     public void showProductImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
         response.setContentType("image/jpeg");
 
@@ -60,16 +71,6 @@ public class ShopController {
 
         InputStream is = new ByteArrayInputStream(product.getPicture());
         IOUtils.copy(is, response.getOutputStream());
-    }
-
- /*   @GetMapping("/{id}")
-    @ResponseBody
-    public ResponseEntity<byte[]> content (@PathVariable Integer id){
-        Product product = repository.findById(id).get();
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.parseMediaType(product.getMimeType()))
-                .body(product.getPicture());
     }*/
 
 }
