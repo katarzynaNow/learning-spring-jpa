@@ -11,6 +11,7 @@
 
 <div class="container">
     <a class="btn btn-primary" th:href="@{/shop/create}">Add new product</a>
+    <a class="btn btn-primary" th:href="@{/shop/cart}">Shopping cart</a>
     <br><br>
     <div class="row">
         <div class="col text-center" th:each="c : ${@productRepository.categories()}">
@@ -25,6 +26,8 @@
         <div class="col-3 text-center" th:each="product : ${products}">
                 <img class="img-thumbnail rounded" th:src="@{'shop/product/image/' + ${product.id}}" style="max-height: 200px">
                 <p th:text="${product.name}"></p>
+                <a class="btn btn-primary btn-sm" th:href="@{/shop/cart}">Add to shopping cart</a>
+            <br><br>
         </div>
     </div>
 </div>
