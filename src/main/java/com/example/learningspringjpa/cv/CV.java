@@ -19,7 +19,7 @@ public class CV {
 
     private String lastName;
 
-    private String birtDante;
+    private String birthDate;
 
     @Lob
     private byte[] picture;
@@ -60,12 +60,12 @@ public class CV {
         this.lastName = lastName;
     }
 
-    public String getBirtDante() {
-        return birtDante;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirtDante(String birtDante) {
-        this.birtDante = birtDante;
+    public void setBirthDate(String birtDante) {
+        this.birthDate = birtDante;
     }
 
     public byte[] getPicture() {
