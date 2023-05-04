@@ -69,6 +69,38 @@
         </tbody>
     </table>
 
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Company</th>
+            <th>Position</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <form method="post" th:action="@{/cv/edit/{id}/job (id=${cv.id})}" th:object="${newJob}">
+                <td><input class="from-control" type="text" th:field="*{company}"></td>
+                <td><input class="from-control" type="text" th:field="*{position}"></td>
+                <td><input class="from-control" type="date" th:field="*{startDate}"></td>
+                <td><input class="from-control" type="date" th:field="*{endDate}"></td>
+                <td>
+                    <input class="btn btn-primary" type="submit" value="Add">
+                </td>
+            </form>
+        </tr>
+        <tr th:each="job : ${cv.experience}">
+            <td th:text="${job.company}"></td>
+            <td th:text="${job.position}"></td>
+            <td th:text="${job.startDate}"></td>
+            <td th:text="${job.endDate}"></td>
+            <td><a th:href="@{/cv/edit/{cvId}/job/{id}/delete (cvId = ${cv.id}, id=${job.id})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
     </div>
 </div>
 </body>

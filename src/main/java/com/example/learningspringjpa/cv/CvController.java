@@ -18,6 +18,10 @@ public class CvController {
     @Autowired
     private SkillRepository skillRepository;
 
+    @Autowired
+    private JobRepsoitory jobRepsoitory;
+
+
     @GetMapping
     public String list(Model model){
         model.addAttribute("cvs", repository.findAll());
@@ -60,6 +64,9 @@ public class CvController {
         model.addAttribute("newSkill", newSkill);
         model.addAttribute("types", Type.values());
 
+        Job newJob = new Job();
+        model.addAttribute("newJob", newJob);
+
         return "cv/edit";
     }
 
@@ -92,5 +99,17 @@ public class CvController {
         return "redirect:/cv/edit/" + cvId;
     }
 
+    @PostMapping("/edit/{cvId}/job")
+    public String addJob (Job job, @PathVariable Integer cvId) {
+        CV existing = repository.findById(cvId).get();
+        job.setCv(existing);
+        jobRepsoitory.save(job);
+        return "redirect:/cv/edit/" + cvId;
+    }
 
+    @GetMapping("/edit/{cvId}/job/{id}/delete")
+    public String deleteJob(@PathVariable Integer cvId, @PathVariable Integer id) {
+        jobRepsoitory.deleteById(id);
+        return "redirect:/cv/edit/" + cvId;
+    }
 }

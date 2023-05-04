@@ -33,6 +33,45 @@
             </p>
         </div>
     </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Degree</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="skill : ${cv.skills}">
+                <td th:text="${skill.name}"></td>
+                <td th:text="${skill.type}"></td>
+                <td th:text="${skill.degree}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Company</th>
+                <th>Position</th>
+                <th>Start date</th>
+                <th>End date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="job : ${cv.experience}">
+                <td th:text="${job.company}"></td>
+                <td th:text="${job.position}"></td>
+                <td th:text="${job.startDate}"></td>
+                <td th:text="${job.endDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 </body>
