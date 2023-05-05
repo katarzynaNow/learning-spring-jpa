@@ -15,15 +15,17 @@
     <br>
     <div class="row" th:each="cv: ${cvs}">
         <div class="col-4">
-            <img style="max-width: 200px" class="image-fluid rounded" th:src="@{/cv/file/{id} (id=${cv.id})}" >
+            <img style="max-width: 50%; height: 150px" class="image-fluid rounded" th:src="@{/cv/file/{id} (id=${cv.id})}" >
         </div>
         <div class="col-7">
             <h2>
+                <br>
                 <span th:text="${cv.firstName}"></span>
                 <span th:text="${cv.lastName}"></span>
             </h2>
         </div>
         <div class="col-1">
+            <br>
             <a th:href="@{/cv/view/{id} (id=${cv.id})}" class="btn btn-primary">Open</a>
         </div>
     </div>
